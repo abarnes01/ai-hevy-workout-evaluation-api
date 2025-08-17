@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AiWorkoutPlanAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250817082119_AddFitnessProfileAndHevyKey")]
-    partial class AddFitnessProfileAndHevyKey
+    [Migration("20250817194340_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

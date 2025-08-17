@@ -8,7 +8,7 @@ namespace AiWorkoutPlanAPI.Data
 		public AppDbContext CreateDbContext(string[] args)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-			optionsBuilder.UseSqlite("Data Source=AiHevyWorkoutPlans.db");
+			optionsBuilder.UseSqlite("Data Source=AiHevyWorkoutEvaluation.db");
 
 			return new AppDbContext(optionsBuilder.Options);
 		}

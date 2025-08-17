@@ -73,7 +73,7 @@ namespace AiWorkoutPlanAPI.Services
 			var claims = new List<Claim> {
 				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
 				new Claim(ClaimTypes.Name, user.Username)
-            };
+			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

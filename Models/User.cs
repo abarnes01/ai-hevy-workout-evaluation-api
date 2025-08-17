@@ -8,5 +8,5 @@ public class User
 	public byte[] PasswordSalt { get; set; } = Array.Empty<byte>();
 	public string? HevyApiKey { get; set; }
 
-	public FitnessProfile? FitnessProfile { get; set; }  // navigation property
+	public FitnessProfile? FitnessProfile { get; set; }
 }

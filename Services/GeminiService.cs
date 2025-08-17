@@ -1,5 +1,4 @@
 using System.Text.Json;
-using AiWorkoutPlanAPI.Dtos;
 using GenerativeAI;
 
 namespace AiWorkoutPlanAPI.Services
@@ -16,7 +15,6 @@ namespace AiWorkoutPlanAPI.Services
 
 		public async Task<List<MilestoneDto>> EvaluateMilestones(object promptData)
 		{
-			// Serialize the promptData safely, ignoring cycles
 			var jsonOptions = new JsonSerializerOptions
 			{
 				ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles,
@@ -40,26 +38,13 @@ Return only a JSON array like this:
 
 			var response = await _model.GenerateContentAsync(prompt);
 
-			Console.WriteLine("=== GEMINI RAW RESPONSE ===");
-			Console.WriteLine(response.Text());
-			Console.WriteLine("==========================");
-
-			// --- CLEAN RESPONSE ---
 			var rawText = response.Text().Trim();
+			rawText = rawText.Trim('`');
 
-			// Strip leading backticks and markdown labels like `json`
-			rawText = rawText.Trim('`'); // remove backticks
-
-			// Strip any leading non-JSON characters until we hit '[' or '{'
 			int jsonStart = rawText.IndexOfAny(new char[] { '[', '{' });
 			if (jsonStart >= 0)
 				rawText = rawText[jsonStart..].Trim();
 
-			Console.WriteLine("=== GEMINI CLEANED RESPONSE ===");
-			Console.WriteLine(rawText);
-			Console.WriteLine("===============================");
-
-			// Deserialize JSON into DTO
 			try
 			{
 				var milestones = JsonSerializer.Deserialize<List<MilestoneDto>>(rawText,

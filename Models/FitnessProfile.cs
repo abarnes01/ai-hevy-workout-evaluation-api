@@ -11,14 +11,13 @@ namespace AiWorkoutPlanAPI.Models
 		[Required]
 		public string Goal { get; set; } = string.Empty;
 
-		public float? Weight { get; set; }      // kg
-		public float? Height { get; set; }      // cm
+		public float? Weight { get; set; }
+		public float? Height { get; set; }
 		public int? Age { get; set; }
-		public string? Gender { get; set; }     // Male/Female/Other
-		public float? BodyMusclePercentage { get; set; } // %
+		public string? Gender { get; set; }
+		public float? BodyMusclePercentage { get; set; }
 		public int? WorkoutDaysPerWeek { get; set; }
 
-		// Relationship to User
 		[Required]
 		public int UserId { get; set; }
 		public User User { get; set; } = null!;

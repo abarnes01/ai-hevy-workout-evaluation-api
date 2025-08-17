@@ -12,9 +12,6 @@ namespace AiWorkoutPlanAPI.Services
 			_httpClient.BaseAddress = new Uri("https://api.hevyapp.com/v1/");
 		}
 
-		/// <summary>
-		/// Gets the raw routines JSON from Hevy's API.
-		/// </summary>
 		public async Task<string> GetRoutinesAsync(string apiKey, int page = 1, int pageSize = 10)
 		{
 			var request = new HttpRequestMessage(HttpMethod.Get, $"routines?page={page}&pageSize={pageSize}");
@@ -23,7 +20,7 @@ namespace AiWorkoutPlanAPI.Services
 			var response = await _httpClient.SendAsync(request);
 			response.EnsureSuccessStatusCode();
 
-			return await response.Content.ReadAsStringAsync(); // return raw JSON
+			return await response.Content.ReadAsStringAsync();
 		}
 	}
 }

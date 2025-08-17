@@ -54,8 +54,6 @@ namespace AiWorkoutPlanAPI.Services
 			return (true, token, "Login successful");
 		}
 
-		// Helpers
-
 		private void CreatePasswordHash(string password, out byte[] hash, out byte[] salt)
 		{
 			using var hmac = new HMACSHA512();
@@ -74,7 +72,7 @@ namespace AiWorkoutPlanAPI.Services
 		{
 			var claims = new List<Claim> {
 				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-				new Claim(ClaimTypes.Name, user.Username) // changed from Email to Username
+				new Claim(ClaimTypes.Name, user.Username)
             };
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

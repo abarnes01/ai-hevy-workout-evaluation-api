@@ -21,7 +21,6 @@ namespace AiWorkoutPlanAPI.Controllers
 			_context = context;
 		}
 
-		// --- Hevy API Key Endpoints ---
 		[HttpPost("hevy-key")]
 		public async Task<IActionResult> SetHevyApiKey([FromBody] SetHevyApiKeyDto dto)
 		{
@@ -43,11 +42,9 @@ namespace AiWorkoutPlanAPI.Controllers
 			return Ok(new
 			{
 				HasApiKey = !string.IsNullOrEmpty(user.HevyApiKey),
-				ApiKey = user.HevyApiKey // remove in production if needed
 			});
 		}
 
-		// --- Fitness Profile Endpoints ---
 		[HttpGet("profile")]
 		public async Task<IActionResult> GetFitnessProfile()
 		{
@@ -55,7 +52,7 @@ namespace AiWorkoutPlanAPI.Controllers
 			if (user == null) return NotFound(new { Error = "User not found." });
 
 			if (user.FitnessProfile == null)
-				return Ok(new FitnessProfileDto()); // return empty profile if not set
+				return Ok(new FitnessProfileDto());
 
 			var dto = new FitnessProfileDto
 			{
@@ -95,7 +92,6 @@ namespace AiWorkoutPlanAPI.Controllers
 			return Ok(new { Message = "Fitness profile saved successfully." });
 		}
 
-		// --- Helper ---
 		private async Task<User?> GetCurrentUserAsync()
 		{
 			var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

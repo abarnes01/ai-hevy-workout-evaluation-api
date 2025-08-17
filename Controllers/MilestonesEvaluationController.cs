@@ -42,10 +42,8 @@ namespace AiWorkoutPlanAPI.Controllers
 			if (string.IsNullOrEmpty(user.HevyApiKey))
 				return BadRequest(new { Error = "Hevy API key not set." });
 
-			// 1. Fetch Hevy routines (raw JSON)
 			var routinesJson = await _hevyService.GetRoutinesAsync(user.HevyApiKey, page: 1, pageSize: 10);
 
-			// 2. Build safe promptData avoiding cycles
 			var promptData = new
 			{
 				FitnessProfile = new
@@ -61,7 +59,6 @@ namespace AiWorkoutPlanAPI.Controllers
 				Routines = routinesJson
 			};
 
-			// 3. Call Gemini
 			var milestones = await _geminiService.EvaluateMilestones(promptData);
 
 			return Ok(new
